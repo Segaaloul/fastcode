@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Solution index{% endblock %}
+
+{% block body %}
+    <h1>Solution index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Framework</th>
+                <th>Domaine</th>
+                <th>ImagePath</th>
+                <th>ZipFilePath</th>
+                <th>Prix</th>
+                <th>ProduitType</th>
+                <th>DateAjout</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for solution in solutions %}
+            <tr>
+                <td>{{ solution.id }}</td>
+                <td>{{ solution.nom }}</td>
+                <td>{{ solution.description }}</td>
+                <td>{{ solution.framework }}</td>
+                <td>{{ solution.domaine }}</td>
+                <td>{% if solution.imagePath %}
+<img src="{{ path('solution_image', { filename: solution.imagePath|split('/')|last }) }}" alt="Image" style="max-width: 80px; ">
+{% endif %}
+
+                <td>{{ solution.zipFilePath }}</td>
+                <td>{{ solution.prix }}</td>
+                <td>{{ solution.produitType }}</td>
+                <td>{{ solution.dateAjout ? solution.dateAjout|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_solution_show', {'id': solution.id}) }}">show</a>
+                    <a href="{{ path('app_solution_edit', {'id': solution.id}) }}">edit</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_solution_new') }}">Create new</a>
+{% endblock %}

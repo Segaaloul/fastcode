@@ -1,1 +1,44 @@
 helloworld
+
+
+
+
+les entites
+
+
+Solution
+id              // int, PK
+nom             // string
+description     // text
+framework       // string (Laravel, React, etc.)
+domaine         // string (e-commerce, gestion stock, etc.)
+imagePath       // string (chemin vers image preview)
+zipFilePath     // string (chemin vers le .zip)
+prix            // float (0 = gratuit)
+produitType     // string ou enum: 'template' | 'module'
+dateAjout       // datetime
+
+
+
+Download 
+id              // int, PK
+user            // ManyToOne vers User
+solution        // ManyToOne vers Solution
+date            // datetime
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

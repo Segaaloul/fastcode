@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Solution{% endblock %}
+
+{% block body %}
+    <h1>Solution</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ solution.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ solution.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ solution.description }}</td>
+            </tr>
+            <tr>
+                <th>Framework</th>
+                <td>{{ solution.framework }}</td>
+            </tr>
+            <tr>
+                <th>Domaine</th>
+                <td>{{ solution.domaine }}</td>
+            </tr>
+            <tr>
+                <th>ImagePath</th>
+                <td>{{ solution.imagePath }}</td>
+            </tr>
+            <tr>
+                <th>ZipFilePath</th>
+                <td>{{ solution.zipFilePath }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ solution.prix }}</td>
+            </tr>
+            <tr>
+                <th>ProduitType</th>
+                <td>{{ solution.produitType }}</td>
+            </tr>
+            <tr>
+                <th>DateAjout</th>
+                <td>{{ solution.dateAjout ? solution.dateAjout|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_solution_index') }}">back to list</a>
+
+    <a href="{{ path('app_solution_edit', {'id': solution.id}) }}">edit</a>
+                        <a href="{{ path('solution_zip', { id: solution.id }) }}" class="btn btn-success"> 📦 Télécharger la solution</a>
+
+
+    {{ include('solution/_delete_form.html.twig') }}
+{% endblock %}

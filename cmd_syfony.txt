@@ -22,3 +22,64 @@ php bin/console doctrine:database:create
 
 hahahahaha
 
+
+
+partir auth des utilisateurs
+
+
+composer require symfony/security-bundle
+
+php bin/console make:user
+
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+en suiste => php bin/console make:auth
+
+Choix :
+
+        type : Login form authenticator
+
+        nom du service : LoginAuthenticator
+
+        contrôleur : SecurityController
+
+        Symfony va créer tout ce qu’il faut :
+
+        formulaire de login
+
+        gestion de session
+
+        route /login
+
+
+cree l enregistrement de l utilisateur
+
+
+php bin/console make:registration-form
+
+
+
+
+pour cree une relation entre deux entiter
+
+on cree l entirer , on met le nom de la collone que l on veut , puis dans la partie type (string , int float ....), on met =>>>>>> relation
+
+
+
+CRUD
+
+    php bin/console make:crud Solution
+
+
+
+
+
+
+
+
+
+
+
+
+
