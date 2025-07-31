@@ -15,6 +15,9 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use App\Entity\Download;
+use Symfony\Bundle\SecurityBundle\Security;
+
 
 #[Route('/solution')]
 final class SolutionController extends AbstractController
@@ -193,13 +196,24 @@ final class SolutionController extends AbstractController
 
 
     #[Route('/solution/zip/{id}', name: 'solution_zip')]
-    public function zip(Solution $solution): BinaryFileResponse
+    public function zip(Solution $solution, EntityManagerInterface $entityManager, Security $security): BinaryFileResponse
     {
         $zipPath = $this->getParameter('kernel.project_dir') . '/' . $solution->getZipFilePath();
 
         if (!file_exists($zipPath)) {
             throw $this->createNotFoundException('Fichier introuvable');
         }
+
+
+        // ✅ Enregistrer le téléchargement
+        $download = new Download();
+        $download->setUser($security->getUser());
+        $download->setSolution($solution);
+        $download->setDate(new \DateTimeImmutable());
+
+        $entityManager->persist($download);
+        $entityManager->flush();
+
 
         // Extraire le nom réel du fichier
         $filename = basename($zipPath);
